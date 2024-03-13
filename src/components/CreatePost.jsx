@@ -40,11 +40,11 @@ const CreatePost = () => {
                     size={23}
                     onClick={() => navigate("/")}
                 />
-                <p className="text-xl">Post Detail</p>
+                <p className="text-xl">Create Post</p>
             </span>
             <input
                 type="text"
-                className="border outline-none pl-3 p-2 w-[50%] rounded-md"
+                className="border outline-none pl-3 p-2 lg:w-[50%] md:w-[50%] sm:w-full w-full rounded-md"
                 placeholder="title"
                 name="title"
                 onChange={handleChange}
@@ -54,7 +54,7 @@ const CreatePost = () => {
             <br />
             <input
                 type="text"
-                className="border outline-none pl-3 p-2 w-[50%] rounded-md"
+                className="border outline-none pl-3 p-2 lg:w-[50%] md:w-[50%] sm:w-full w-full rounded-md"
                 placeholder="description"
                 name="description"
                 onChange={handleChange}

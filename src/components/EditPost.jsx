@@ -45,7 +45,7 @@ const EditPost = () => {
             </span>
             <input
                 type="text"
-                className="border outline-none pl-3 p-2 w-[50%] mt-5 rounded-md"
+                className="border outline-none pl-3 p-2 lg:w-[50%] md:w-[50%] sm:w-full w-full mt-5 rounded-md"
                 placeholder="title"
                 name="title"
                 onChange={handleChange}
@@ -55,7 +55,7 @@ const EditPost = () => {
             <br />
             <input
                 type="text"
-                className="border outline-none pl-3 p-2 w-[50%] rounded-md"
+                className="border outline-none pl-3 p-2 lg:w-[50%] md:w-[50%] sm:w-full w-full rounded-md"
                 placeholder="description"
                 name="description"
                 onChange={handleChange}

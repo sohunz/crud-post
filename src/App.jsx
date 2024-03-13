@@ -7,7 +7,7 @@ import PostDetail from "./components/PostDetail";
 
 const App = () => {
     return (
-        <div className=" max-w-[800px] mx-auto mt-10">
+        <div className=" max-w-[800px] mx-auto mt-10 p-5">
             <Routes>
                 <Route path="/" element={<Post />} />
                 <Route path="/create" element={<CreatePost />} />

@@ -16,25 +16,35 @@ const CreatePost = () => {
 
     const create = async () => {
         try {
-            if (form.title || form.description !== "") {
-                axios.post("http://localhost:8000/posts", form);
+            if (title !== "" && description !== "") {
+                await axios.post("http://localhost:8000/posts", form);
                 navigate("/");
-            } else {
-                alert("please input...");
+            } else if (title == "" && description !== "") {
+                alert("please input title");
+            } else if (title !== "" && description == "") {
+                alert("Please input description.");
+            } else if (title == "" && description == "") {
+                alert("please input title and descripton");
             }
+            console.log("form", form);
         } catch (err) {
             console.log(err.message);
         }
     };
 
     return (
-        <div className="m-10">
-            <span onClick={() => navigate("/")}>
-                <IoMdArrowBack className="mb-5 cursor-pointer" />
+        <div>
+            <span className="flex items-center mb-10 gap-2 border-b pb-3">
+                <IoMdArrowBack
+                    className="cursor-pointer"
+                    size={23}
+                    onClick={() => navigate("/")}
+                />
+                <p className="text-xl">Post Detail</p>
             </span>
             <input
                 type="text"
-                className="border outline-none p-2"
+                className="border outline-none pl-3 p-2 w-[50%] rounded-md"
                 placeholder="title"
                 name="title"
                 onChange={handleChange}
@@ -44,7 +54,7 @@ const CreatePost = () => {
             <br />
             <input
                 type="text"
-                className="border outline-none p-2"
+                className="border outline-none pl-3 p-2 w-[50%] rounded-md"
                 placeholder="description"
                 name="description"
                 onChange={handleChange}
@@ -53,7 +63,7 @@ const CreatePost = () => {
             <br />
             <br />
             <button
-                className="border rounded-md bg-green-700 text-white p-2"
+                className="border rounded-md bg-green-700 text-white py-2 px-4"
                 onClick={create}
             >
                 Create

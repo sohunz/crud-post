@@ -23,16 +23,22 @@ const Post = () => {
     }, []);
 
     // delete post
-    const deletePost = (postId) => {
-        axios.delete(`http://localhost:8000/posts/${postId}`);
-        setPosts(posts.filter((post) => post.id !== postId));
+    const deletePost = async (postId) => {
+        try {
+            await axios.delete(`http://localhost:8000/posts/${postId}`);
+            setPosts((prevPosts) =>
+                prevPosts.filter((post) => post.id !== postId)
+            );
+        } catch (error) {
+            console.log(error.message);
+        }
     };
 
     return (
-        <div className="max-w-[700px] mx-auto pt-10">
+        <div className="">
             <Link
                 to="/create"
-                className="bg-green-700 text-white p-2 rounded-md"
+                className="bg-blue-700 text-white px-3 py-3 rounded-md"
             >
                 Create Post
             </Link>
@@ -42,10 +48,10 @@ const Post = () => {
                         return (
                             <div
                                 key={post.id}
-                                className="border p-4 flex flex-row justify-between rounded-lg"
+                                className="border p-5 flex flex-row justify-between rounded-lg group"
                             >
                                 <div className="flex flex-col justify-between">
-                                    <div>
+                                    <div className="mb-6">
                                         <p className="text-xl mb-3 line-clamp-2">
                                             {post.title}
                                         </p>
@@ -53,16 +59,15 @@ const Post = () => {
                                             {post.description}
                                         </p>
                                     </div>
-                                    <Link
-                                        to={`/post/${post.id}`}
-                                        className="border "
-                                    >
-                                        see detail
+                                    <Link to={`/post/${post.id}`}>
+                                        <p className="text-sm text-blue-600 invisible group-hover:visible hover:underline">
+                                            See detail
+                                        </p>
                                     </Link>
                                 </div>
-                                <div className="flex gap-5">
+                                <div className="flex gap-5 pl-5">
                                     <Link to={`/edit/${post.id}`}>
-                                        <FaRegEdit />
+                                        <FaRegEdit size={16} />
                                     </Link>
                                     <span
                                         onClick={() => deletePost(post.id)}

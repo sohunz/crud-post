@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { IoMdArrowBack } from "react-icons/io";
 
 const EditPost = () => {
     const { id } = useParams();
@@ -16,22 +17,35 @@ const EditPost = () => {
 
     const editPost = async () => {
         try {
-            await axios.put(`http://localhost:8000/posts/${id}`, form, {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
+            if (form.title !== "") {
+                await axios.put(`http://localhost:8000/posts/${id}`, form, {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+                navigate("/");
+            } else {
+                navigate("/");
+            }
         } catch (error) {
             console.error("Error updating data:", error);
         }
-        navigate("/");
+        console.log("edited");
     };
 
     return (
-        <div className="m-10">
+        <div>
+            <span className="flex items-center mb-5 gap-2 border-b pb-3">
+                <IoMdArrowBack
+                    className="cursor-pointer"
+                    size={23}
+                    onClick={() => navigate("/")}
+                />
+                <p className="text-xl">Edit Post</p>
+            </span>
             <input
                 type="text"
-                className="border outline-none p-2"
+                className="border outline-none pl-3 p-2 w-[50%] mt-5 rounded-md"
                 placeholder="title"
                 name="title"
                 onChange={handleChange}
@@ -41,7 +55,7 @@ const EditPost = () => {
             <br />
             <input
                 type="text"
-                className="border outline-none p-2"
+                className="border outline-none pl-3 p-2 w-[50%] rounded-md"
                 placeholder="description"
                 name="description"
                 onChange={handleChange}
@@ -51,13 +65,7 @@ const EditPost = () => {
             <br />
             <div>
                 <button
-                    className="border rounded-md bg-gray-600 text-white p-2"
-                    onClick={() => navigate("/")}
-                >
-                    Cancel
-                </button>
-                <button
-                    className="border rounded-md bg-green-700 text-white p-2"
+                    className="border rounded-md bg-green-700 text-white px-3 py-2"
                     onClick={editPost}
                 >
                     Edit Post

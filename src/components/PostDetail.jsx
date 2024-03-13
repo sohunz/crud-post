@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoMdArrowBack } from "react-icons/io";
+import { BiCommentDetail } from "react-icons/bi";
+import { TbListDetails } from "react-icons/tb";
 
 const PostDetail = () => {
     const navigate = useNavigate();
@@ -19,17 +21,33 @@ const PostDetail = () => {
         console.log(posts);
     }, []);
     return (
-        <div className="m-10">
-            <span onClick={() => navigate("/")}>
-                <IoMdArrowBack className="mb-5 cursor-pointer" />
+        <div>
+            <span className="flex items-center mb-5 gap-2 border-b pb-3">
+                <IoMdArrowBack
+                    className="cursor-pointer"
+                    size={23}
+                    onClick={() => navigate("/")}
+                />
+                <p className="text-xl">Post Detail</p>
             </span>
-            <div>
-                <h2 className="mb-4 font-bold text-xl">Post Detail</h2>
+            <div className="pt-2">
                 {post.map((item) => {
                     return (
                         <div key={item.id}>
-                            <p>Title: {item.title}</p> <br />
-                            <p>Description: {item.description}</p>
+                            <span>
+                                <span className="flex items-center gap-2 text-blue-600 pb-1">
+                                    <TbListDetails size={20} />
+                                    <p className="text-lg">Title</p>
+                                </span>
+                                <p>{item.title}</p> <br />
+                            </span>
+                            <span>
+                                <span className="flex items-center gap-2 text-blue-600 pb-1">
+                                    <BiCommentDetail size={20} />
+                                    <p className="text-lg">Description</p>
+                                </span>
+                                <p>{item.description}</p>
+                            </span>
                         </div>
                     );
                 })}

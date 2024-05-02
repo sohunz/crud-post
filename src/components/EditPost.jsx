@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoMdArrowBack } from "react-icons/io";
+import Swal from "sweetalert2";
 
 const EditPost = () => {
     const { id } = useParams();
@@ -23,6 +24,13 @@ const EditPost = () => {
                         "Content-Type": "application/json",
                     },
                 });
+                Swal.fire({
+                    title: "Updated!",
+                    text: "Your post has been edited.",
+                    icon: "success",
+                    timer: 1000,
+                    showConfirmButton: false,
+                });
                 navigate("/");
             } else {
                 navigate("/");
@@ -30,7 +38,6 @@ const EditPost = () => {
         } catch (error) {
             console.error("Error updating data:", error);
         }
-        console.log("edited");
     };
 
     return (

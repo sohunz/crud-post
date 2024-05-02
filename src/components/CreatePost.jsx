@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoMdArrowBack } from "react-icons/io";
+import Swal from "sweetalert2";
 
 const CreatePost = () => {
     const navigate = useNavigate();
@@ -18,13 +19,32 @@ const CreatePost = () => {
         try {
             if (title !== "" && description !== "") {
                 await axios.post("http://localhost:8000/posts", form);
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Create has been successed!",
+                    showConfirmButton: false,
+                    timer: 1000,
+                });
                 navigate("/");
             } else if (title == "" && description !== "") {
-                alert("please input title");
+                Swal.fire({
+                    icon: "error",
+                    title: "Please input Title!",
+                    footer: '<a href="#">Why do I have this issue?</a>',
+                });
             } else if (title !== "" && description == "") {
-                alert("Please input description.");
+                Swal.fire({
+                    icon: "error",
+                    title: "Please input Description",
+                    footer: '<a href="#">Why do I have this issue?</a>',
+                });
             } else if (title == "" && description == "") {
-                alert("please input title and descripton");
+                Swal.fire({
+                    icon: "error",
+                    title: "Please input Title and Description",
+                    footer: '<a href="#">Why do I have this issue?</a>',
+                });
             }
             console.log("form", form);
         } catch (err) {
